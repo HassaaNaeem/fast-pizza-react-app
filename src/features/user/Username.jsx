@@ -1,7 +1,7 @@
 import React from "react";
 
 function Username() {
-  return <div className="text-sm font-semibold">Hassaan</div>;
+  return <div className="hidden text-sm font-semibold md:block">Hassaan</div>;
 }
 
 export default Username;
