@@ -38,7 +38,7 @@ function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state == "submitting";
 
-  const formErrors = useActionData();
+  const formErrors = useActionData(); // getting error from action function
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
@@ -93,6 +93,7 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          {/*getting card data*/}
           <Button type="primary" disabled={isSubmitting}>
             {isSubmitting ? "Placing order..." : "Order now"}
           </Button>
@@ -115,9 +116,9 @@ export async function action({ request }) {
   const errors = {};
   if (!isValidPhone(order.phone))
     errors.phone = "Please enter valid phone number";
-  if (Object.keys(errors).length > 0) return errors;
 
-  const newOrder = await createOrder(order);
+  if (Object.keys(errors).length > 0) return errors;
+  const newOrder = createOrder(order);
 
   return redirect(`/order/${newOrder.id}`);
 }
